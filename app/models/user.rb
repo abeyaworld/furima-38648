@@ -15,11 +15,11 @@ class User < ApplicationRecord
   validates :first_name, presence: true, format: { with: VALID_NAME_REGEX, message: '全角である必要があります' }
 
   VALID_NAME_KANA_REGEX = /\A[ァ-ヶー－]+\z/
-  validates :family_name, presence: true, format: { with: VALID_NAME_REGEX_KANA, message: '全角カタカナである必要があります' }
-  validates :first_name, presence: true, format: { with: VALID_NAME_REGEX_KANA, message: '全角カタカナである必要があります' }
+  validates :family_name, presence: true, format: { with: VALID_NAME_KANA_REGEX, message: '全角カタカナである必要があります' }
+  validates :first_name, presence: true, format: { with: VALID_NAME_KANA_REGEX, message: '全角カタカナである必要があります' }
 
-  validates birth_year, presence: true
-  validates birth_month, presence: true
-  validates birth_day, presence: true
+  validates :birth_year, presence: true
+  validates :birth_month, presence: true
+  validates :birth_day, presence: true
 
 end
