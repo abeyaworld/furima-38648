@@ -10,51 +10,53 @@
 | first_name         | string  | null: false               |
 | family_name_kana   | string  | null: false               |
 | first_name_kana    | string  | null: false               |
-| birthday           | string  | null: false               |
+| birthday           | string  | null: false               | <!--レビュー前に修正-->
 ### Association
 has_many :items
-has_many :purchases
-has_many :comments
+has_many :orders
+has_many :histories
 
 ## Itemsテーブル
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| item_image      | text       | null: false                    |
-| item_name       | string     | null: false                    |
-| description     | string     | null: false                    |
-| price           | integer    | null: false                    |
-| category        | string     | null: false                    |
-| condition       | string     | null: false                    |
-| shipping_fee    | string     | null: false                    |
-| item_prefecture | string     | null: false                    |
-| shipping_date   | string     | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| item_name          | string     | null: false                    |
+| description        | string     | null: false                    |
+| price              | integer    | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| shipping_fee_id    | integer    | null: false                    |
+| item_prefecture_id | integer    | null: false                    |
+| shipping_date_id   | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 ### Association
 belongs_to :user
-has_one :purchase
-has_many :comment
+has_one :order
+has_one :history
 
-## Purchasesテーブル
-| Column              | Type       | Options                        |
-| ------------------- | ---------- | ------------------------------ |
-| post_num            | string     | null: false                    |
-| purchase_prefecture | string     | null: false                    |
-| municipality        | string     | null: false                    |
-| address             | string     | null: false                    |
-| building            | string     |                                |
-| phone_num           | string     | null: false                    |
-| user_id             | references | null: false, foreign_key: true |
-| item_id             | references | null: false, foreign_key: true |
+## Ordersテーブル
+| Column             | Type       | Options                        |
+| ------------------ | -----------| ------------------------------ |
+| post_num           | string     | null: false                    |
+| item_prefecture_id | integer    | null: false                    |
+| municipality       | string     | null: false                    |
+| address            | string     | null: false                    |
+| building           | string     |                                |
+| phone_num          | string     | null: false                    |
+| user               | references | null: false, foreign_key: true |
+| item               | references | null: false, foreign_key: true |
 ### Association
 belongs_to :user
 belongs_to :item
+has_one :history
 
-## Commentsテーブル
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| text    | string     | null: false                    |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+
+## Historiesテーブル
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+| order  | references | null: false, foreign_key: true |
 ### Association
 belongs_to :user
 belongs_to :item
+belongs_to :order
