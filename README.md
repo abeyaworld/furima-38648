@@ -10,17 +10,16 @@
 | first_name         | string  | null: false               |
 | family_name_kana   | string  | null: false               |
 | first_name_kana    | string  | null: false               |
-| birthday           | string  | null: false               | <!--レビュー前に修正-->
+| birthday           | date    | null: false               |
 ### Association
 has_many :items
-has_many :orders
 has_many :histories
 
 ## Itemsテーブル
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | item_name          | string     | null: false                    |
-| description        | string     | null: false                    |
+| description        | text       | null: false                    |
 | price              | integer    | null: false                    |
 | category_id        | integer    | null: false                    |
 | condition_id       | integer    | null: false                    |
@@ -30,7 +29,6 @@ has_many :histories
 | user               | references | null: false, foreign_key: true |
 ### Association
 belongs_to :user
-has_one :order
 has_one :history
 
 ## Ordersテーブル
@@ -42,21 +40,15 @@ has_one :history
 | address            | string     | null: false                    |
 | building           | string     |                                |
 | phone_num          | string     | null: false                    |
-| user               | references | null: false, foreign_key: true |
-| item               | references | null: false, foreign_key: true |
 ### Association
-belongs_to :user
-belongs_to :item
-has_one :history
-
+belongs_to :history
 
 ## Historiesテーブル
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | user   | references | null: false, foreign_key: true |
 | item   | references | null: false, foreign_key: true |
-| order  | references | null: false, foreign_key: true |
 ### Association
 belongs_to :user
 belongs_to :item
-belongs_to :order
+has_one :order
