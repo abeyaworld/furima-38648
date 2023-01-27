@@ -13,7 +13,7 @@
 | birthday           | date    | null: false               |
 ### Association
 has_many :items
-has_many :histories
+has_many :orders
 
 ## Itemsテーブル
 | Column             | Type       | Options                        |
@@ -29,21 +29,22 @@ has_many :histories
 | user               | references | null: false, foreign_key: true |
 ### Association
 belongs_to :user
-has_one :history
+has_one :order
 
-## Ordersテーブル
+## Addressesテーブル
 | Column             | Type       | Options                        |
 | ------------------ | -----------| ------------------------------ |
 | post_num           | string     | null: false                    |
 | item_prefecture_id | integer    | null: false                    |
 | municipality       | string     | null: false                    |
-| address            | string     | null: false                    |
+| house_num          | string     | null: false                    |
 | building           | string     |                                |
 | phone_num          | string     | null: false                    |
+| order              | references | null: false, foreign_key: true |
 ### Association
-belongs_to :history
+belongs_to :order
 
-## Historiesテーブル
+## Ordersテーブル
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | user   | references | null: false, foreign_key: true |
@@ -51,4 +52,4 @@ belongs_to :history
 ### Association
 belongs_to :user
 belongs_to :item
-has_one :order
+has_one :address
