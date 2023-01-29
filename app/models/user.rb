@@ -18,4 +18,6 @@ class User < ApplicationRecord
   validates :first_name_kana, presence: true, format: { with: VALID_NAME_KANA_REGEX, message: '全角カタカナである必要があります' }
 
   validates :birthday, presence: true
+
+  has_many :items
 end
