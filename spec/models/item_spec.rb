@@ -30,42 +30,42 @@ RSpec.describe Item, type: :model do
       it 'カテゴリ未選択では登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it '状態が未選択では登録できない' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
       end
       it '配送料負担先が未選択では登録できない' do
         @item.shipping_fee_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping fee must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping fee must be other than 1')
       end
       it '都道府県が未選択では登録できない' do
         @item.item_prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item prefecture must be other than 1")
+        expect(@item.errors.full_messages).to include('Item prefecture must be other than 1')
       end
       it '発送日が未選択では登録できない' do
         @item.shipping_date_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping date must be other than 1")
+        expect(@item.errors.full_messages).to include('Shipping date must be other than 1')
       end
       it '金額が9,999,999以上では登録できない' do
-        @item.price = 999999999
+        @item.price = 999_999_999
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it '金額が300未満では登録できない' do
         @item.price = 100
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '金額が全角では登録できない' do
         @item.price = '５０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
     end
   end
