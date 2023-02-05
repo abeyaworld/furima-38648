@@ -36,6 +36,15 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if @item.user == current_user
+      @item.destroy
+      redirect_to root_path
+    else
+      render :show
+    end
+  end
+
   private
 
   def move_to_index
