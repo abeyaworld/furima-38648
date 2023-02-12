@@ -14,7 +14,7 @@ RSpec.describe OrderAddress, type: :model do
       end
       it '建物名が空欄' do
         @order_address.building = ''
-        be_valid
+        expect(@order_address).to be_valid
       end
     end
     context '購入NG' do
@@ -53,8 +53,18 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone num can't be blank")
       end
-      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能' do
+      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能(不適切文字)' do
         @order_address.phone_num = '000-0000-0000'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone num が不正です')
+      end
+      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能(9桁以下)' do
+        @order_address.phone_num = '000'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone num が不正です')
+      end
+      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能(12桁以上)' do
+        @order_address.phone_num = '000000000000000000000000'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone num が不正です')
       end
